@@ -49,7 +49,6 @@ const BlogCard = ({
           className="mt-3 font-normal"
         >
           {summary}
-          {postId}
         </Typography>
       </CardBody>
       <CardFooter className="flex items-center justify-between">

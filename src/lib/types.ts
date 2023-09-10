@@ -22,8 +22,10 @@ export interface IAuth {
 export interface IBlogs {
   blogs: TBlogs[] | null;
   viewBlog: TBlogs | null;
+  userBlogs: TBlogs[] | null;
   getBlogs: () => void;
   getBlog: (postId: string) => void;
+  getUserBlogs: (authorId: string) => void;
 }
 
 export type TBlogs = {
@@ -47,8 +49,11 @@ export type TUserCredentials = {
 export type TCurrentUser = {
   success: boolean;
   token: string;
+  id: string;
   userId: string;
   username: string;
+  createdAt: string;
+  email: string;
 };
 
 export type TCurrentSession = {

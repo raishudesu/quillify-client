@@ -6,6 +6,8 @@ import Footer from "./components/Footer";
 import SignIn from "./pages/SignIn/SignIn";
 import Blogs from "./pages/Blogs/Blogs";
 import Blog from "./pages/Blog/Blog";
+import Profile from "./pages/Profile/Profile";
+import Protected from "./components/Protected";
 
 const LazySignInForm = lazy(
   () => import("./pages/SignIn/components/SignInForm")
@@ -27,6 +29,14 @@ function App() {
           </Route>
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/blog/:postId" element={<Blog />} />
+          <Route
+            path="/profile"
+            element={
+              <Protected>
+                <Profile />
+              </Protected>
+            }
+          />
         </Routes>
 
         <Footer />
