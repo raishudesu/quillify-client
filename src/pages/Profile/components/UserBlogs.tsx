@@ -12,7 +12,7 @@ const UserBlogs = () => {
 
   const { isLoading, isSuccess, refetch } = useQuery({
     queryKey: ["userblogs"],
-    queryFn: () => id && getUserBlogs(id || (userId as string)),
+    queryFn: () => getUserBlogs(id || (userId as string)),
     refetchOnWindowFocus: false,
   });
 
@@ -21,10 +21,10 @@ const UserBlogs = () => {
   }, [id, userId, refetch]);
 
   return (
-    <div>
+    <div className="w-full">
       <div className="text-2xl font-bold text-center">My Blogs</div>
       {!isLoading && isSuccess ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-2">
+        <div className="flex flex-col gap-6 p-2">
           {userBlogs?.map(
             ({ author, createdAt, summary, title, _id }, index) => (
               <BlogCard

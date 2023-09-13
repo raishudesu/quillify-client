@@ -18,6 +18,9 @@ export const useAuth = create<IAuth>((set) => ({
         credentials: "include", // to inlcude user session
       });
       const userData = await response.json();
+
+      if (userData.name === "ZodError" || userData.success === false) return;
+
       set({ currentUser: userData });
       useAuth.getState().getUserSession();
       console.log("Logged in: ", userData);

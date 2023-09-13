@@ -15,7 +15,7 @@ const Blogs = () => {
     <div className="py-6 mx-auto max-w-screen-2xl px-6 flex flex-col items-center justify-center gap-6 text-blue-gray-900 ">
       <div className="text-2xl font-bold">Blogs</div>
       {!isLoading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-2">
+        <div className="flex flex-col gap-6 p-2">
           {blogs?.map(({ author, createdAt, summary, title, _id }, index) => (
             <BlogCard
               author={author}

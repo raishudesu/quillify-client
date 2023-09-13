@@ -21,7 +21,7 @@ const Home = () => {
       <div className="w-full flex flex-col justify-between items-center gap-3">
         <div className="text-2xl font-bold">Recent blogs</div>
         {!isLoading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-2">
+          <div className="flex flex-col gap-6 p-2">
             {blogs
               ?.slice(0, 3)
               .map(({ author, createdAt, summary, title, _id }, index) => (

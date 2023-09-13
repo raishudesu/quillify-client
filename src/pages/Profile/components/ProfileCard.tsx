@@ -7,10 +7,12 @@ import {
   Button,
 } from "@material-tailwind/react";
 import { useAuth } from "../../../stores/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const ProfileCard = () => {
   const { currentUser } = useAuth();
   const { username, createdAt, email } = currentUser || {};
+  const navigate = useNavigate();
   return (
     <Card className="w-full flex flex-col items-center">
       <CardHeader className="rounded-full max-w-xs shadow-lg  overflow-hidden">
@@ -31,7 +33,12 @@ const ProfileCard = () => {
         </Typography>
       </CardBody>
       <CardFooter className="flex justify-center gap-7 pt-2">
-        <Button color="purple">Edit profile</Button>
+        <Button color="purple" onClick={() => navigate("/profile/createBlog")}>
+          Create post
+        </Button>
+        <Button color="purple" variant="outlined">
+          Edit profile
+        </Button>
       </CardFooter>
     </Card>
   );

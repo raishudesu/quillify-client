@@ -14,6 +14,7 @@ const SignInForm = () => {
     e.preventDefault();
     try {
       userLogin(email, password);
+      setTimeout(() => navigate("/profile"), 1000);
     } catch (error) {
       console.log(error);
     } finally {

@@ -22,6 +22,7 @@ export const useBlogs = create<IBlogs>((set) => ({
       );
       const viewBlog = await res.json();
       set({ viewBlog });
+      console.log(viewBlog);
       return viewBlog;
     } catch (error) {
       console.log(error);
@@ -35,6 +36,54 @@ export const useBlogs = create<IBlogs>((set) => ({
       const userBlogs = await res.json();
       set({ userBlogs });
       return userBlogs;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  createPost: async (
+    title: string,
+    summary: string,
+    content: string,
+    author: string,
+    authorId: string,
+    token: string
+  ) => {
+    try {
+      const res = await fetch("http://localhost:4000/api/blogs/createBlog", {
+        method: "POST",
+        body: JSON.stringify({
+          title,
+          summary,
+          content,
+          author,
+          authorId,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          "x-auth-token": token,
+        },
+      });
+
+      const data = await res.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  deletePost: async (postId: string, token: string) => {
+    try {
+      const res = await fetch(
+        `http://localhost:4000/api/blogs/deleteBlog/${postId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            "x-auth-token": token,
+          },
+        }
+      );
+      const data = await res.json();
+      console.log(data);
     } catch (error) {
       console.log(error);
     }

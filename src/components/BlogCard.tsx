@@ -1,6 +1,5 @@
 import {
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
   Typography,
@@ -25,20 +24,9 @@ const BlogCard = ({
   const navigate = useNavigate();
   return (
     <Card
-      className="max-w-[24rem] overflow-hidden hover:shadow-purple-500 transition ease-in-out delay-100 cursor-pointer"
+      className=" w-full overflow-hidden hover:shadow-purple-500 transition ease-in-out delay-100 cursor-pointer"
       onClick={() => navigate(`/blog/${postId}`)}
     >
-      <CardHeader
-        floated={false}
-        shadow={false}
-        color="transparent"
-        className="m-0 rounded-none"
-      >
-        <img
-          src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-          alt="ui/ux review check"
-        />
-      </CardHeader>
       <CardBody>
         <Typography variant="h5" color="blue-gray">
           {title}

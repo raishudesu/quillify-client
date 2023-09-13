@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { useBlogs } from "../../../stores/useBlogs";
 import { Spinner } from "@material-tailwind/react";
+import { TBlogs } from "../../../lib/types";
+import ModifyBlog from "./ModifyBlog";
 
 const ViewBlog = ({ postId }: { postId: string }) => {
   const { getBlog, viewBlog } = useBlogs();
@@ -10,15 +12,22 @@ const ViewBlog = ({ postId }: { postId: string }) => {
     queryFn: () => getBlog(postId),
     refetchOnWindowFocus: false,
   });
-  const { title, author, content, createdAt } = viewBlog || {};
+  const { title, author, content, createdAt, authorId } = viewBlog || {};
   return (
-    <div>
+    <div className="min-h-screen">
       {!isLoading ? (
         <>
-          <div>{title}</div>
-          <div>{author}</div>
-          <div>{createdAt}</div>
-          <div>{content}</div>
+          <div className="flex flex-col gap-2">
+            <div className="font-bold text-2xl">{title}</div>
+            <div className="font-semibold text-xl">Author: {author}</div>
+            <div className="">Posted at: {createdAt}</div>
+            <ModifyBlog authorId={authorId as string} postId={postId} />
+          </div>
+
+          <div
+            dangerouslySetInnerHTML={{ __html: content as TBlogs }}
+            className="flex flex-col justify-center items-center text-xl"
+          />
         </>
       ) : (
         <Spinner />

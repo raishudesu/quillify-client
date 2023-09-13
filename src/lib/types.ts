@@ -26,12 +26,21 @@ export interface IBlogs {
   getBlogs: () => void;
   getBlog: (postId: string) => void;
   getUserBlogs: (authorId: string) => void;
+  createPost: (
+    title: string,
+    summary: string,
+    content: string,
+    author: string,
+    authorId: string,
+    token: string
+  ) => void;
+  deletePost: (postId: string, token: string) => void;
 }
 
 export type TBlogs = {
   author: string;
   authorId: string;
-  content: string;
+  content: string | TrustedHTML;
   createdAt: string;
   summary: string;
   title: string;
