@@ -7,11 +7,12 @@ import {
   Button,
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import { GiScrollQuill } from "react-icons/gi";
 import { useAuth } from "../stores/useAuth";
 import UserMenu from "./UserMenu";
+import SearchBar from "./SearchBar";
 
 function NavList({
   setOpenNav,
@@ -19,6 +20,8 @@ function NavList({
   setOpenNav: Dispatch<SetStateAction<boolean>>;
 }) {
   const navigate = useNavigate();
+  const location = useLocation();
+  if (location.pathname !== "/") return <SearchBar />;
   return (
     <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       <Typography
@@ -79,6 +82,7 @@ const Header = () => {
   const { currentUser } = useAuth();
 
   const navigate = useNavigate();
+  const location = useLocation();
   const [openNav, setOpenNav] = useState(false);
 
   const handleWindowResize = () =>
@@ -99,6 +103,7 @@ const Header = () => {
           href="#"
           variant="h6"
           className="mr-4 cursor-pointer py-1.5 flex items-center"
+          onClick={() => navigate("/")}
         >
           <GiScrollQuill size={20} />
           <div>
@@ -112,22 +117,26 @@ const Header = () => {
         <div className="hidden gap-2 lg:flex">
           {!currentUser ? (
             <>
-              <Button
-                onClick={() => navigate("/auth")}
-                variant="text"
-                size="sm"
-                color="blue-gray"
-              >
-                Sign In
-              </Button>
-              <Button
-                onClick={() => navigate("/auth/signup")}
-                variant="gradient"
-                color="purple"
-                size="sm"
-              >
-                Sign Up
-              </Button>
+              {location.pathname !== "/" ? null : (
+                <>
+                  <Button
+                    onClick={() => navigate("/auth")}
+                    variant="text"
+                    size="sm"
+                    color="blue-gray"
+                  >
+                    Sign In
+                  </Button>
+                  <Button
+                    onClick={() => navigate("/auth/signup")}
+                    variant="gradient"
+                    color="purple"
+                    size="sm"
+                  >
+                    Sign Up
+                  </Button>
+                </>
+              )}
             </>
           ) : (
             <UserMenu />
@@ -151,30 +160,26 @@ const Header = () => {
         <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
           {!currentUser ? (
             <>
-              <Button
-                onClick={() => {
-                  navigate("/auth");
-                  setOpenNav(!openNav);
-                }}
-                variant="outlined"
-                size="sm"
-                color="blue-gray"
-                fullWidth
-              >
-                Sign In
-              </Button>
-              <Button
-                onClick={() => {
-                  navigate("/auth/signup");
-                  setOpenNav(!openNav);
-                }}
-                variant="gradient"
-                color="purple"
-                size="sm"
-                fullWidth
-              >
-                Sign Up
-              </Button>
+              {location.pathname !== "/" ? null : (
+                <>
+                  <Button
+                    onClick={() => navigate("/auth")}
+                    variant="text"
+                    size="sm"
+                    color="blue-gray"
+                  >
+                    Sign In
+                  </Button>
+                  <Button
+                    onClick={() => navigate("/auth/signup")}
+                    variant="gradient"
+                    color="purple"
+                    size="sm"
+                  >
+                    Sign Up
+                  </Button>
+                </>
+              )}
             </>
           ) : (
             <UserMenu />

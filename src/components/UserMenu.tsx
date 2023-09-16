@@ -3,12 +3,11 @@ import {
   MenuHandler,
   MenuList,
   MenuItem,
-  Avatar,
   Typography,
 } from "@material-tailwind/react";
 import { useAuth } from "../stores/useAuth";
-import UserAvatar from "../assets/userAvatar.svg";
 import { useNavigate } from "react-router-dom";
+import { UserCircleIcon } from "@heroicons/react/24/solid";
 
 const UserMenu = () => {
   const navigate = useNavigate();
@@ -16,13 +15,7 @@ const UserMenu = () => {
   return (
     <Menu>
       <MenuHandler>
-        <Avatar
-          variant="circular"
-          alt="tania andrew"
-          className="cursor-pointer"
-          size="sm"
-          src={UserAvatar}
-        />
+        <UserCircleIcon className="h-8 w-8 cursor-pointer" />
       </MenuHandler>
       <MenuList>
         <MenuItem className="flex items-center gap-2">

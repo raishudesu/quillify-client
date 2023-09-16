@@ -7,11 +7,9 @@ import Blogs from "./pages/Blogs/Blogs";
 import Blog from "./pages/Blog/Blog";
 import Profile from "./pages/Profile/Profile";
 import Protected from "./components/Protected";
-import MainProfile from "./pages/Profile/components/MainProfile";
-import CreateBlog from "./pages/CreateBlog/CreateBlog";
 import ScrollToTop from "./components/ScrollToTop";
 import NewFooter from "./components/NewFooter";
-import UpdateBlog from "./pages/UpdateBlog/UpdateBlog";
+import MainProfile from "./pages/Profile/components/MainProfile";
 
 const LazySignInForm = lazy(
   () => import("./pages/SignIn/components/SignInForm")
@@ -19,6 +17,8 @@ const LazySignInForm = lazy(
 const LazySignUpForm = lazy(
   () => import("./pages/SignIn/components/SignUpForm")
 );
+const LazyCreateBlog = lazy(() => import("./pages/CreateBlog/CreateBlog"));
+const LazyUpdateBlog = lazy(() => import("./pages/UpdateBlog/UpdateBlog"));
 
 function App() {
   return (
@@ -42,8 +42,8 @@ function App() {
             }
           >
             <Route path="/profile" element={<MainProfile />} />
-            <Route path="/profile/createBlog" element={<CreateBlog />} />
-            <Route path="/profile/editBlog" element={<UpdateBlog />} />
+            <Route path="/profile/createBlog" element={<LazyCreateBlog />} />
+            <Route path="/profile/editBlog" element={<LazyUpdateBlog />} />
           </Route>
         </Routes>
 

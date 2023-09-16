@@ -3,6 +3,7 @@ import { useBlogs } from "../../../stores/useBlogs";
 import { Spinner } from "@material-tailwind/react";
 import { TBlogs } from "../../../lib/types";
 import ModifyBlog from "./ModifyBlog";
+import SideBar from "../../../components/SideBar";
 
 const ViewBlog = ({ postId }: { postId: string }) => {
   const { getBlog, viewBlog } = useBlogs();
@@ -15,24 +16,29 @@ const ViewBlog = ({ postId }: { postId: string }) => {
   const { title, author, content, createdAt, authorId } = viewBlog || {};
   return (
     <div className="min-h-screen">
-      {!isLoading ? (
-        <>
-          <div className="flex flex-col gap-2">
-            <div className="font-bold text-2xl">{title}</div>
-            <div className="font-semibold text-xl">
-              <em>by {author}</em>
+      <div className="flex">
+        <div className="hidden lg:block">
+          <SideBar />
+        </div>
+        {!isLoading ? (
+          <div>
+            <div className="flex flex-col gap-2">
+              <div className="font-bold text-2xl">{title}</div>
+              <div className="font-semibold text-xl">
+                <em>by {author}</em>
+              </div>
+              <div className="">Posted at: {createdAt}</div>
+              <ModifyBlog authorId={authorId as string} postId={postId} />
             </div>
-            <div className="">Posted at: {createdAt}</div>
-            <ModifyBlog authorId={authorId as string} postId={postId} />
+            <div
+              dangerouslySetInnerHTML={{ __html: content as TBlogs }}
+              className="flex flex-col justify-center items-center text-justify mt-6 gap-1 text-lg"
+            />
           </div>
-          <div
-            dangerouslySetInnerHTML={{ __html: content as TBlogs }}
-            className="flex flex-col justify-center items-center text-justify mt-6 gap-1 text-lg"
-          />
-        </>
-      ) : (
-        <Spinner />
-      )}
+        ) : (
+          <Spinner />
+        )}
+      </div>
     </div>
   );
 };
