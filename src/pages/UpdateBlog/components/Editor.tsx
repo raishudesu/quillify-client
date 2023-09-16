@@ -12,23 +12,25 @@ Quill.register("modules/imageActions", ImageActions);
 Quill.register("modules/imageFormats", ImageFormats);
 
 const Editor = () => {
-  const [title, setTitle] = useState("");
-  const [summary, setSummary] = useState("");
-  const [content, setContent] = useState("");
+  const { editPost, viewBlog } = useBlogs();
+  const [title, setTitle] = useState(viewBlog?.title);
+  const [summary, setSummary] = useState(viewBlog?.summary);
+  const [content, setContent] = useState(viewBlog?.content);
 
-  const { createPost } = useBlogs();
   const { currentUser } = useAuth();
+  const postData = {
+    postId: viewBlog?._id,
+    token: currentUser?.token,
+    body: {
+      title,
+      summary,
+      content,
+    },
+  };
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     try {
-      createPost(
-        title,
-        summary,
-        content,
-        currentUser?.username as string,
-        (currentUser?.userId as string) || (currentUser?.id as string),
-        currentUser?.token as string
-      );
+      editPost(postData);
     } catch (error) {
       console.log(error);
     }
@@ -66,7 +68,7 @@ const Editor = () => {
 
   return (
     <div className="flex flex-col gap-4 md:min-w-[500px] w-full max-h-content items-center ">
-      <div className="text-2xl font-bold">Create blog</div>
+      <div className="text-2xl font-bold">Edit post</div>
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-4 w-full items-center max-w-screen-2xl"
@@ -89,13 +91,13 @@ const Editor = () => {
         <ReactQuill
           formats={formats}
           modules={modules}
-          value={content}
+          value={content as string}
           onChange={setContent}
           theme="snow"
           style={{ width: "100%" }}
         />
         <Button className="min-w-[20%] mt-10" type="submit">
-          Post
+          Update
         </Button>
       </form>
     </div>

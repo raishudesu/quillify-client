@@ -19,7 +19,9 @@ const ViewBlog = ({ postId }: { postId: string }) => {
         <>
           <div className="flex flex-col gap-2">
             <div className="font-bold text-2xl">{title}</div>
-            <div className="font-semibold text-xl">Author: {author}</div>
+            <div className="font-semibold text-xl">
+              <em>by {author}</em>
+            </div>
             <div className="">Posted at: {createdAt}</div>
             <ModifyBlog authorId={authorId as string} postId={postId} />
           </div>

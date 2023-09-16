@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { IBlogs } from "../lib/types";
+import { IBlogs, TUpdatePostData } from "../lib/types";
 
 export const useBlogs = create<IBlogs>((set) => ({
   blogs: [],
@@ -79,6 +79,26 @@ export const useBlogs = create<IBlogs>((set) => ({
           headers: {
             "Content-type": "application/json; charset=UTF-8",
             "x-auth-token": token,
+          },
+        }
+      );
+      const data = await res.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  editPost: async (postData: TUpdatePostData) => {
+    const { postId, body, token } = postData;
+    try {
+      const res = await fetch(
+        `http://localhost:4000/api/blogs/updateBlog/${postId}`,
+        {
+          method: "PATCH",
+          body: JSON.stringify(body),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            "x-auth-token": token as string,
           },
         }
       );

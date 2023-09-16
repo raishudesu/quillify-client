@@ -11,6 +11,7 @@ import MainProfile from "./pages/Profile/components/MainProfile";
 import CreateBlog from "./pages/CreateBlog/CreateBlog";
 import ScrollToTop from "./components/ScrollToTop";
 import NewFooter from "./components/NewFooter";
+import UpdateBlog from "./pages/UpdateBlog/UpdateBlog";
 
 const LazySignInForm = lazy(
   () => import("./pages/SignIn/components/SignInForm")
@@ -42,6 +43,7 @@ function App() {
           >
             <Route path="/profile" element={<MainProfile />} />
             <Route path="/profile/createBlog" element={<CreateBlog />} />
+            <Route path="/profile/editBlog" element={<UpdateBlog />} />
           </Route>
         </Routes>
 

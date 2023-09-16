@@ -35,6 +35,7 @@ export interface IBlogs {
     token: string
   ) => void;
   deletePost: (postId: string, token: string) => void;
+  editPost: (postData: TUpdatePostData) => void;
 }
 
 export type TBlogs = {
@@ -72,4 +73,10 @@ export type TCurrentSession = {
   iat: number;
   exp: number;
   token: string;
+};
+
+export type TUpdatePostData = {
+  postId: string | undefined;
+  token: string | undefined;
+  body: object | undefined;
 };
