@@ -7,11 +7,13 @@ import { ImageActions } from "@xeger/quill-image-actions";
 import { ImageFormats } from "@xeger/quill-image-formats";
 import { useBlogs } from "../../../stores/useBlogs";
 import { useAuth } from "../../../stores/useAuth";
+import { useNavigate } from "react-router-dom";
 
 Quill.register("modules/imageActions", ImageActions);
 Quill.register("modules/imageFormats", ImageFormats);
 
 const Editor = () => {
+  const navigate = useNavigate();
   const { editPost, viewBlog } = useBlogs();
   const [title, setTitle] = useState(viewBlog?.title);
   const [summary, setSummary] = useState(viewBlog?.summary);
@@ -31,6 +33,7 @@ const Editor = () => {
     e.preventDefault();
     try {
       editPost(postData);
+      navigate("/profile");
     } catch (error) {
       console.log(error);
     }

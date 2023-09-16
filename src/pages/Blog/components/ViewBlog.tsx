@@ -25,10 +25,9 @@ const ViewBlog = ({ postId }: { postId: string }) => {
             <div className="">Posted at: {createdAt}</div>
             <ModifyBlog authorId={authorId as string} postId={postId} />
           </div>
-
           <div
             dangerouslySetInnerHTML={{ __html: content as TBlogs }}
-            className="flex flex-col justify-center items-center text-xl"
+            className="flex flex-col justify-center items-center text-justify mt-6 gap-1 text-lg"
           />
         </>
       ) : (

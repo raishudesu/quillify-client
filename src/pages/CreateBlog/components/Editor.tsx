@@ -7,11 +7,13 @@ import { ImageActions } from "@xeger/quill-image-actions";
 import { ImageFormats } from "@xeger/quill-image-formats";
 import { useBlogs } from "../../../stores/useBlogs";
 import { useAuth } from "../../../stores/useAuth";
+import { useNavigate } from "react-router-dom";
 
 Quill.register("modules/imageActions", ImageActions);
 Quill.register("modules/imageFormats", ImageFormats);
 
 const Editor = () => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
@@ -29,6 +31,7 @@ const Editor = () => {
         (currentUser?.userId as string) || (currentUser?.id as string),
         currentUser?.token as string
       );
+      navigate("/profile");
     } catch (error) {
       console.log(error);
     }

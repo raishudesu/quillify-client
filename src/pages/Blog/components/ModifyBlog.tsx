@@ -1,7 +1,7 @@
 import { Button } from "@material-tailwind/react";
 import { useAuth } from "../../../stores/useAuth";
-import { useBlogs } from "../../../stores/useBlogs";
 import { useNavigate } from "react-router-dom";
+import DeleteDialog from "./DeleteDialog";
 
 const ModifyBlog = ({
   authorId,
@@ -12,11 +12,6 @@ const ModifyBlog = ({
 }) => {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
-  const { deletePost } = useBlogs();
-  const handleDeletePost = () => {
-    deletePost(postId, currentUser?.token as string);
-    alert("Post deleted!");
-  };
 
   const handleEditPost = () => {
     navigate("/profile/editBlog");
@@ -28,9 +23,7 @@ const ModifyBlog = ({
         <Button color="purple" onClick={handleEditPost}>
           Edit post
         </Button>
-        <Button color="red" variant="outlined" onClick={handleDeletePost}>
-          Delete post
-        </Button>
+        <DeleteDialog postId={postId} />
       </div>
     );
   } else {
