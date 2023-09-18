@@ -10,6 +10,9 @@ import Protected from "./components/Protected";
 import ScrollToTop from "./components/ScrollToTop";
 import NewFooter from "./components/NewFooter";
 import MainProfile from "./pages/Profile/components/MainProfile";
+import Settings from "./pages/settings/Settings";
+import SettingsProfile from "./pages/settings/components/SettingsProfile";
+import SettingsAccount from "./pages/settings/components/SettingsAccount";
 
 const LazySignInForm = lazy(
   () => import("./pages/SignIn/components/SignInForm")
@@ -44,6 +47,13 @@ function App() {
             <Route path="/profile" element={<MainProfile />} />
             <Route path="/profile/createBlog" element={<LazyCreateBlog />} />
             <Route path="/profile/editBlog" element={<LazyUpdateBlog />} />
+            <Route element={<Settings />}>
+              <Route path="/profile/settings" element={<SettingsProfile />} />
+              <Route
+                path="/profile/settings/account"
+                element={<SettingsAccount />}
+              />
+            </Route>
           </Route>
         </Routes>
 

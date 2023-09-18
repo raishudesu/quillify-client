@@ -47,7 +47,7 @@ const SideBar = () => {
               </ListItemPrefix>
               Profile
             </ListItem>
-            <ListItem>
+            <ListItem onClick={() => navigate("/profile/settings")}>
               <ListItemPrefix>
                 <Cog6ToothIcon className="h-5 w-5" />
               </ListItemPrefix>
@@ -57,7 +57,7 @@ const SideBar = () => {
               <ListItemPrefix>
                 <PowerIcon className="h-5 w-5" />
               </ListItemPrefix>
-              Log Out
+              Sign out
             </ListItem>
           </>
         ) : (
