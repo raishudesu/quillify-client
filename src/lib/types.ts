@@ -17,6 +17,13 @@ export interface IAuth {
   ) => Promise<void>;
   getUserSession: () => void;
   userLogout: () => void;
+  updateUserProfile: (
+    newUsername: string,
+    newEmail: string,
+    id: string,
+    password: string,
+    token: string
+  ) => void;
 }
 
 export interface IBlogs {
@@ -80,3 +87,8 @@ export type TUpdatePostData = {
   token: string | undefined;
   body: object | undefined;
 };
+
+export interface IUpdateUserProfile extends TCurrentUser {
+  username: string;
+  email: string;
+}

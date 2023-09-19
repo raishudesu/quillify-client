@@ -4,7 +4,7 @@ import { TCurrentUser } from "../../../lib/types";
 import { useEffect, useState } from "react";
 
 const SettingsProfile = () => {
-  const { currentUser } = useAuth();
+  const { currentUser, updateUserProfile } = useAuth();
 
   const { username, email } = currentUser as TCurrentUser;
 
@@ -18,6 +18,23 @@ const SettingsProfile = () => {
       ? setDisabled(true)
       : setDisabled(false);
   }, [newUsername, newEmail, password]);
+
+  const handleProfileUpdate = () => {
+    try {
+      updateUserProfile(
+        newUsername,
+        newEmail,
+        currentUser?.id as string,
+        password,
+        currentUser?.token as string
+      );
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setPassword("");
+    }
+  };
+
   return (
     <div className="w-full max-w-screen-sm">
       <Card className="w-full p-4 flex flex-col gap-4">
@@ -38,10 +55,15 @@ const SettingsProfile = () => {
         <Input
           label="Password"
           size="lg"
+          type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button color="purple" disabled={disabled}>
+        <Button
+          color="purple"
+          disabled={disabled}
+          onClick={handleProfileUpdate}
+        >
           Save profile
         </Button>
       </Card>

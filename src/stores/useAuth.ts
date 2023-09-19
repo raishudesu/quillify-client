@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { IAuth } from "../lib/types";
+import { IAuth, IUpdateUserProfile } from "../lib/types";
 
 export const useAuth = create<IAuth>((set) => ({
   currentUser: null,
@@ -72,6 +72,47 @@ export const useAuth = create<IAuth>((set) => ({
     }
     set({ currentSession: null });
     set({ currentUser: null });
+  },
+  updateUserProfile: async (
+    newUsername: string,
+    newEmail: string,
+    id: string,
+    password: string,
+    token: string
+  ) => {
+    try {
+      const res = await fetch(
+        `http://localhost:4000/api/auth/updateUserProfile/${id}`,
+        {
+          method: "PATCH",
+          body: JSON.stringify({
+            username: newUsername,
+            email: newEmail,
+            password,
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            "x-auth-token": token,
+          },
+        }
+      );
+      const data = await res.json();
+
+      // UPDATE THE CURRENTUSER STATE FOR REAL-TIME CLIENT UPDATES
+      if (data.success) {
+        const oldUser = useAuth.getState().currentUser;
+        const newUser = {
+          ...oldUser,
+          username: data.updatedCredentials.username,
+          email: data.updatedCredentials.email,
+        };
+
+        set({ currentUser: newUser as IUpdateUserProfile });
+      }
+      console.log(data.message);
+    } catch (error) {
+      console.log(error);
+    }
   },
 }));
 
