@@ -89,10 +89,10 @@ export const useBlogs = create<IBlogs>((set) => ({
     }
   },
   editPost: async (postData: TUpdatePostData) => {
-    const { postId, body, token } = postData;
+    const { postId, userId, body, token } = postData;
     try {
       const res = await fetch(
-        `http://localhost:4000/api/blogs/updateBlog/${postId}`,
+        `http://localhost:4000/api/blogs/updateBlog/${userId}/${postId}`,
         {
           method: "PATCH",
           body: JSON.stringify(body),

@@ -21,6 +21,7 @@ const Editor = () => {
 
   const { currentUser } = useAuth();
   const postData = {
+    userId: currentUser?.id,
     postId: viewBlog?._id,
     token: currentUser?.token,
     body: {

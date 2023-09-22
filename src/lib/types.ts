@@ -90,6 +90,7 @@ export type TCurrentSession = {
 };
 
 export type TUpdatePostData = {
+  userId: string | undefined;
   postId: string | undefined;
   token: string | undefined;
   body: object | undefined;
