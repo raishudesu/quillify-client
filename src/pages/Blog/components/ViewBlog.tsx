@@ -15,29 +15,31 @@ const ViewBlog = ({ postId }: { postId: string }) => {
   });
   const { title, author, content, createdAt, authorId } = viewBlog || {};
   return (
-    <div className="min-h-screen">
-      <div className="flex">
+    <div className="w-full min-h-screen">
+      <div className="w-full flex">
         <div className="hidden lg:block">
           <SideBar />
         </div>
-        {!isLoading ? (
-          <div>
-            <div className="flex flex-col gap-2">
-              <div className="font-bold text-2xl">{title}</div>
-              <div className="font-semibold text-xl">
-                <em>by {author}</em>
+        <div className="w-full flex justify-center items-center overflow-hidden">
+          {!isLoading ? (
+            <div className="w-full">
+              <div className="w-full flex flex-col gap-2">
+                <div className="font-bold text-2xl">{title}</div>
+                <div className="font-semibold text-xl">
+                  <em>by {author}</em>
+                </div>
+                <div className="">Posted at: {createdAt}</div>
+                <ModifyBlog authorId={authorId as string} postId={postId} />
               </div>
-              <div className="">Posted at: {createdAt}</div>
-              <ModifyBlog authorId={authorId as string} postId={postId} />
+              <div
+                dangerouslySetInnerHTML={{ __html: content as TBlogs }}
+                className="w-full mt-6 gap-1 text-lg text-start"
+              />
             </div>
-            <div
-              dangerouslySetInnerHTML={{ __html: content as TBlogs }}
-              className="flex flex-col justify-center items-center text-justify mt-6 gap-1 text-lg"
-            />
-          </div>
-        ) : (
-          <Spinner />
-        )}
+          ) : (
+            <Spinner />
+          )}
+        </div>
       </div>
     </div>
   );

@@ -5,12 +5,12 @@ import UserBlogs from "./UserBlogs";
 
 const MainProfile = () => {
   return (
-    <div className="flex flex-col lg:flex-row">
+    <div className="w-full flex flex-col lg:flex-row">
       <SubHeader />
       <div className="hidden lg:block">
         <SideBar />
       </div>
-      <div className="flex flex-col gap-6 mt-6">
+      <div className="w-full flex flex-col gap-6 mt-6">
         <ProfileCard />
         <UserBlogs />
       </div>

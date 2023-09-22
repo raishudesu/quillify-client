@@ -16,27 +16,31 @@ const Blogs = () => {
   return (
     <div className="py-6 mx-auto max-w-screen-2xl px-6 flex flex-col items-center justify-center gap-6 text-blue-gray-900 ">
       <SubHeader />
-      <div className="flex">
+      <div className="flex w-full">
         <div className="hidden lg:block">
           <SideBar />
         </div>
-        {!isLoading ? (
-          <div className="flex flex-col gap-6 p-2">
-            <div className="text-2xl font-bold text-center">Blogs</div>
-            {blogs?.map(({ author, createdAt, summary, title, _id }, index) => (
-              <BlogCard
-                author={author}
-                createdAt={createdAt}
-                summary={summary}
-                title={title}
-                postId={_id}
-                key={index}
-              />
-            ))}
-          </div>
-        ) : (
-          <Spinner />
-        )}
+        <div className="flex w-full justify-center items-center min-h-screen">
+          {!isLoading ? (
+            <div className="flex flex-col gap-6 p-2">
+              <div className="text-2xl font-bold text-center">Blogs</div>
+              {blogs?.map(
+                ({ author, createdAt, summary, title, _id }, index) => (
+                  <BlogCard
+                    author={author}
+                    createdAt={createdAt}
+                    summary={summary}
+                    title={title}
+                    postId={_id}
+                    key={index}
+                  />
+                )
+              )}
+            </div>
+          ) : (
+            <Spinner />
+          )}
+        </div>
       </div>
     </div>
   );

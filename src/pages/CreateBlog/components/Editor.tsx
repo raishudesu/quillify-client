@@ -95,7 +95,7 @@ const Editor = () => {
           value={content}
           onChange={setContent}
           theme="snow"
-          style={{ width: "100%" }}
+          className="w-full max-w-screen-2xl break-all"
         />
         <Button className="min-w-[20%] mt-10" type="submit">
           Post

@@ -71,7 +71,7 @@ const Editor = () => {
 
   return (
     <div className="flex flex-col gap-4 md:min-w-[500px] w-full max-h-content items-center ">
-      <div className="text-2xl font-bold">Edit post</div>
+      <div className="text-2xl font-bold">Edit blog</div>
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-4 w-full items-center max-w-screen-2xl"
@@ -97,10 +97,10 @@ const Editor = () => {
           value={content as string}
           onChange={setContent}
           theme="snow"
-          style={{ width: "100%" }}
+          className="w-full max-w-screen-2xl break-all"
         />
         <Button className="min-w-[20%] mt-10" type="submit">
-          Update
+          Save
         </Button>
       </form>
     </div>

@@ -24,6 +24,13 @@ export interface IAuth {
     password: string,
     token: string
   ) => void;
+  updateUserPwd: (
+    pwd: string,
+    newPwd: string,
+    confirmNewPwd: string,
+    id: string,
+    token: string
+  ) => void;
 }
 
 export interface IBlogs {

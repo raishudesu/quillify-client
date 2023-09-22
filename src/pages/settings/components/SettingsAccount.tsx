@@ -1,15 +1,10 @@
-import { Button, Card, Input, Typography } from "@material-tailwind/react";
+import { Button, Card, Typography } from "@material-tailwind/react";
+import SetNewPwd from "./SetNewPwd";
 
 const SettingsAccount = () => {
   return (
     <div className="w-full max-w-screen-sm">
-      <Card className="w-full p-4 flex flex-col gap-2">
-        <Typography variant="h4">Set new password</Typography>
-        <Input label="Current password" size="lg" />
-        <Input label="New password" size="lg" />
-        <Input label="Confirm new password" size="lg" />
-        <Button color="purple">Save </Button>
-      </Card>
+      <SetNewPwd />
       <Card className="mt-4 w-full p-4 flex flex-col gap-2">
         <Typography variant="h4" color="red">
           Delete account

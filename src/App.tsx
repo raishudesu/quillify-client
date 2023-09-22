@@ -56,7 +56,6 @@ function App() {
             </Route>
           </Route>
         </Routes>
-
         <NewFooter />
       </BrowserRouter>
     </div>

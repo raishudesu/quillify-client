@@ -6,7 +6,7 @@ export const useAuth = create<IAuth>((set) => ({
   currentSession: null,
   userLogin: async (email: string, password: string) => {
     try {
-      const response = await fetch("http://localhost:4000/api/auth/login", {
+      const res = await fetch("http://localhost:4000/api/auth/login", {
         method: "POST",
         body: JSON.stringify({
           email,
@@ -17,13 +17,13 @@ export const useAuth = create<IAuth>((set) => ({
         },
         credentials: "include", // to inlcude user session
       });
-      const userData = await response.json();
+      const userData = await res.json();
+      console.log("Logged in: ", userData);
 
       if (userData.name === "ZodError" || userData.success === false) return;
 
       set({ currentUser: userData });
       useAuth.getState().getUserSession();
-      console.log("Logged in: ", userData);
     } catch (error) {
       console.log(error);
     }
@@ -110,6 +110,36 @@ export const useAuth = create<IAuth>((set) => ({
         set({ currentUser: newUser as IUpdateUserProfile });
       }
       console.log(data.message);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  updateUserPwd: async (
+    pwd: string,
+    newPwd: string,
+    confirmNewPwd: string,
+    id: string,
+    token: string
+  ) => {
+    try {
+      const res = await fetch(
+        `http://localhost:4000/api/auth/updateUserPwd/${id}`,
+        {
+          method: "PATCH",
+          body: JSON.stringify({
+            password: pwd,
+            newPwd,
+            confirmNewPwd,
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            "x-auth-token": token,
+          },
+        }
+      );
+
+      const data = await res.json();
+      console.log(data);
     } catch (error) {
       console.log(error);
     }

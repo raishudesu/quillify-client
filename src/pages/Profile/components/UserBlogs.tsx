@@ -22,25 +22,31 @@ const UserBlogs = () => {
 
   return (
     <div className="w-full">
-      <div className="text-2xl font-bold text-center">My Blogs</div>
-      {!isLoading && isSuccess ? (
-        <div className="flex flex-col gap-6 p-2">
-          {userBlogs?.map(
-            ({ author, createdAt, summary, title, _id }, index) => (
-              <BlogCard
-                author={author}
-                createdAt={createdAt}
-                summary={summary}
-                title={title}
-                postId={_id}
-                key={index}
-              />
-            )
-          )}
-        </div>
-      ) : (
-        <Spinner />
-      )}
+      <div className="w-full text-2xl font-bold text-center">My Blogs</div>
+      <div className="flex w-full justify-center items-center">
+        {!isLoading && isSuccess ? (
+          <div className="w-full flex flex-col gap-6 p-2">
+            {!(userBlogs?.length === undefined) ? (
+              userBlogs?.map(
+                ({ author, createdAt, summary, title, _id }, index) => (
+                  <BlogCard
+                    author={author}
+                    createdAt={createdAt}
+                    summary={summary}
+                    title={title}
+                    postId={_id}
+                    key={index}
+                  />
+                )
+              )
+            ) : (
+              <>No blogs</>
+            )}
+          </div>
+        ) : (
+          <Spinner />
+        )}
+      </div>
     </div>
   );
 };

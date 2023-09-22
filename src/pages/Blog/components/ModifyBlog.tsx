@@ -17,7 +17,10 @@ const ModifyBlog = ({
     navigate("/profile/editBlog");
   };
 
-  if ((authorId === currentUser?.userId || currentUser?.id) && authorId) {
+  if (
+    (authorId === currentUser?.userId || authorId === currentUser?.id) &&
+    authorId
+  ) {
     return (
       <div className="flex gap-4">
         <Button color="purple" onClick={handleEditPost}>
