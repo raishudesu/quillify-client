@@ -1,7 +1,9 @@
 import { Button } from "@material-tailwind/react";
 import HeroImg from "../../../assets/hero.svg";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
   return (
     <div className="w-full flex justify-center items-center text-blue-gray-900  overflow-hidden">
       <div className="flex flex-col md:flex-row justify-center items-center gap-16">
@@ -15,8 +17,12 @@ const Hero = () => {
             to stay ahead in coding and tech.
           </span>
           <div className="flex gap-4">
-            <Button color="purple">Blogs</Button>
-            <Button variant="outlined">Register</Button>
+            <Button color="purple" onClick={() => navigate("/blogs")}>
+              Blogs
+            </Button>
+            <Button variant="outlined" onClick={() => navigate("auth/signup")}>
+              Register
+            </Button>
           </div>
         </div>
         <div className="">

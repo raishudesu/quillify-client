@@ -5,6 +5,7 @@ import {
   CardFooter,
   Typography,
   Tooltip,
+  Chip,
 } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 
@@ -14,12 +15,14 @@ const BlogCard = ({
   createdAt,
   author,
   postId,
+  tags,
 }: {
   title: string;
   summary: string;
   createdAt: string;
   author: string;
   postId: string;
+  tags: string[];
 }) => {
   const navigate = useNavigate();
   return (
@@ -38,13 +41,19 @@ const BlogCard = ({
         >
           {summary}
         </Typography>
+        <div className="flex gap-2 flex-wrap mt-4">
+          {tags.map((tag, index) => (
+            <Chip key={index} value={tag} variant="ghost" />
+          ))}
+        </div>
       </CardBody>
-      <CardFooter className="flex items-center justify-between">
+      <CardFooter className="flex items-center gap-4 justify-between">
         <div className="flex items-center -space-x-3">
           <Tooltip content={author}>
             <UserCircleIcon className="h-8 w-8" />
           </Tooltip>
         </div>
+
         <Typography className="font-xs">{createdAt}</Typography>
       </CardFooter>
     </Card>
