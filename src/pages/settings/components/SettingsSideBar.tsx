@@ -8,17 +8,17 @@ import {
 import { UserCircleIcon, Cog6ToothIcon } from "@heroicons/react/24/solid";
 import { useNavigate } from "react-router-dom";
 
-const SettingsSideBar = () => {
+const SettingsSideBar = ({ onClose }: { onClose: () => void | null }) => {
   const navigate = useNavigate();
 
   return (
-    <Card className="hidden lg:block h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-none">
+    <Card className="h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-none">
       <div className="mb-2 p-4">
         <Typography variant="h5" color="purple">
           Settings
         </Typography>
       </div>
-      <List>
+      <List onClick={onClose}>
         <ListItem onClick={() => navigate("/profile/settings")}>
           <ListItemPrefix>
             <UserCircleIcon className="h-5 w-5" />

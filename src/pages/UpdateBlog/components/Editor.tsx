@@ -124,7 +124,7 @@ const Editor = () => {
           theme="snow"
           className="w-full max-w-screen-2xl break-all"
         />
-        <Button className="min-w-[20%] mt-10" type="submit">
+        <Button className="min-w-[20%] mt-10" color="purple" type="submit">
           Save
         </Button>
       </form>
