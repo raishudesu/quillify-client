@@ -46,7 +46,8 @@ export interface IBlogs {
     content: string,
     author: string,
     authorId: string,
-    token: string
+    token: string,
+    tags: string[]
   ) => void;
   deletePost: (postId: string, token: string) => void;
   editPost: (postData: TUpdatePostData) => void;
@@ -63,6 +64,7 @@ export type TBlogs = {
   __v: number;
   _id: string;
   postId: string;
+  tags: string[];
 };
 
 export type TUserCredentials = {

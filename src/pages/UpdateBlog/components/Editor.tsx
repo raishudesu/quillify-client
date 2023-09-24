@@ -8,6 +8,7 @@ import { ImageFormats } from "@xeger/quill-image-formats";
 import { useBlogs } from "../../../stores/useBlogs";
 import { useAuth } from "../../../stores/useAuth";
 import { useNavigate } from "react-router-dom";
+import TagsArea from "./TagsArea";
 
 Quill.register("modules/imageActions", ImageActions);
 Quill.register("modules/imageFormats", ImageFormats);
@@ -18,6 +19,8 @@ const Editor = () => {
   const [title, setTitle] = useState(viewBlog?.title);
   const [summary, setSummary] = useState(viewBlog?.summary);
   const [content, setContent] = useState(viewBlog?.content);
+  const [tag, setTag] = useState("");
+  const [tags, setTags] = useState<string[]>(viewBlog?.tags as string[]);
 
   const { currentUser } = useAuth();
   const postData = {
@@ -28,6 +31,7 @@ const Editor = () => {
       title,
       summary,
       content,
+      tags,
     },
   };
   const handleSubmit = (e: FormEvent) => {
@@ -69,7 +73,14 @@ const Editor = () => {
       ["image", "code-block"],
     ],
   };
+  const handleAddTag = () => {
+    setTags([...tags, tag]);
+    setTag("");
+  };
 
+  const updateTags = (newTags: string[]) => {
+    setTags(newTags);
+  };
   return (
     <div className="flex flex-col gap-4 md:min-w-[500px] w-full max-h-content items-center ">
       <div className="text-2xl font-bold">Edit blog</div>
@@ -84,6 +95,19 @@ const Editor = () => {
           onChange={(e) => setTitle(e.target.value)}
           className="w-full"
         />
+        <div className="w-full flex gap-2">
+          <Input
+            size="lg"
+            label="Add tags"
+            value={tag}
+            onChange={(e) => setTag(e.target.value)}
+            className="w-full"
+          />
+          <Button variant="text" color="purple" onClick={handleAddTag}>
+            Add
+          </Button>
+        </div>
+        <TagsArea tags={tags} updateTags={updateTags} />
         <Textarea
           size="lg"
           label="Summary"

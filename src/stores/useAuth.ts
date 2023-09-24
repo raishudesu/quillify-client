@@ -53,9 +53,13 @@ export const useAuth = create<IAuth>((set) => ({
         credentials: "include",
       });
       const userSession = await response.json();
+      if (userSession.message === "jwt expired") {
+        return set({ currentUser: null });
+      }
       console.log("User data: ", userSession);
       set({ currentUser: userSession });
     } catch (error) {
+      set({ currentUser: null });
       console.log(error);
     }
   },

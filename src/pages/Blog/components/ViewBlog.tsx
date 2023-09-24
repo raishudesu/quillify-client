@@ -4,6 +4,7 @@ import { Spinner } from "@material-tailwind/react";
 import { TBlogs } from "../../../lib/types";
 import ModifyBlog from "./ModifyBlog";
 import SideBar from "../../../components/SideBar";
+import Tags from "./Tags";
 
 const ViewBlog = ({ postId }: { postId: string }) => {
   const { getBlog, viewBlog } = useBlogs();
@@ -13,7 +14,7 @@ const ViewBlog = ({ postId }: { postId: string }) => {
     queryFn: () => getBlog(postId),
     refetchOnWindowFocus: false,
   });
-  const { title, author, content, createdAt, authorId } = viewBlog || {};
+  const { title, author, content, createdAt, authorId, tags } = viewBlog || {};
   return (
     <div className="w-full min-h-screen">
       <div className="w-full flex">
@@ -23,11 +24,12 @@ const ViewBlog = ({ postId }: { postId: string }) => {
         <div className="w-full flex justify-center items-center overflow-hidden">
           {!isLoading ? (
             <div className="w-full">
-              <div className="w-full flex flex-col gap-2">
+              <div className="w-full flex flex-col gap-2 justify-start items-start">
                 <div className="font-bold text-2xl">{title}</div>
                 <div className="font-semibold text-xl">
                   <em>by {author}</em>
                 </div>
+                <Tags tags={tags as string[]} />
                 <div className="">Posted at: {createdAt}</div>
                 <ModifyBlog authorId={authorId as string} postId={postId} />
               </div>

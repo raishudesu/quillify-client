@@ -95,6 +95,7 @@ const Header = () => {
       window.removeEventListener("resize", handleWindowResize);
     };
   }, []);
+
   return (
     <Navbar className="mx-auto max-w-screen-2xl px-6 py-3 shadow-none">
       <div className="flex items-center justify-between text-blue-gray-900">

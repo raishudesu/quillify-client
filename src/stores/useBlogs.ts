@@ -46,7 +46,8 @@ export const useBlogs = create<IBlogs>((set) => ({
     content: string,
     author: string,
     authorId: string,
-    token: string
+    token: string,
+    tags: string[]
   ) => {
     try {
       const res = await fetch("http://localhost:4000/api/blogs/createBlog", {
@@ -57,6 +58,7 @@ export const useBlogs = create<IBlogs>((set) => ({
           content,
           author,
           authorId,
+          tags,
         }),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
