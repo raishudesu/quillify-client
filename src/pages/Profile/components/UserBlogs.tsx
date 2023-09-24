@@ -23,7 +23,7 @@ const UserBlogs = () => {
   return (
     <div className="w-full">
       <div className="w-full text-2xl font-bold text-center">My Blogs</div>
-      <div className="flex w-full justify-center items-center">
+      <div className="flex w-full justify-center min-h-screen">
         {!isLoading && isSuccess ? (
           <div className="w-full flex flex-col gap-6 p-2">
             {!(userBlogs?.length === undefined) ? (

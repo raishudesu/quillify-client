@@ -3,6 +3,7 @@ import { IBlogs, TUpdatePostData } from "../lib/types";
 
 export const useBlogs = create<IBlogs>((set) => ({
   blogs: [],
+  searchedBlogs: [],
   viewBlog: null,
   userBlogs: [],
   getBlogs: async () => {
@@ -24,6 +25,19 @@ export const useBlogs = create<IBlogs>((set) => ({
       set({ viewBlog });
       console.log(viewBlog);
       return viewBlog;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  searchBlogs: async (searchParams: string) => {
+    try {
+      const res = await fetch(
+        `http://localhost:4000/api/blogs/search/${searchParams}`
+      );
+
+      const data = await res.json();
+      set({ searchedBlogs: data });
+      console.log(data);
     } catch (error) {
       console.log(error);
     }

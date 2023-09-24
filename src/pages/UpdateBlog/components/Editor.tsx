@@ -74,7 +74,9 @@ const Editor = () => {
     ],
   };
   const handleAddTag = () => {
-    setTags([...tags, tag]);
+    if (!tags.includes(tag) && tag.trim() !== "") {
+      setTags([...tags, tag.trim()]); // Add the trimmed tag (remove leading/trailing spaces)
+    }
     setTag("");
   };
 

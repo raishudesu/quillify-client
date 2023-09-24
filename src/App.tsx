@@ -13,6 +13,7 @@ import MainProfile from "./pages/Profile/components/MainProfile";
 import Settings from "./pages/settings/Settings";
 import SettingsProfile from "./pages/settings/components/SettingsProfile";
 import SettingsAccount from "./pages/settings/components/SettingsAccount";
+import Search from "./pages/Search/Search";
 
 const LazySignInForm = lazy(
   () => import("./pages/SignIn/components/SignInForm")
@@ -37,6 +38,7 @@ function App() {
           </Route>
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/blog/:postId" element={<Blog />} />
+          <Route path="/search" element={<Search />} />
           <Route
             element={
               <Protected>

@@ -72,7 +72,10 @@ const Editor = () => {
   };
 
   const handleAddTag = () => {
-    setTags([...tags, tag]);
+    // Check if the tag already exists in the array
+    if (!tags.includes(tag) && tag.trim() !== "") {
+      setTags([...tags, tag.trim()]); // Add the trimmed tag (remove leading/trailing spaces)
+    }
     setTag("");
   };
 

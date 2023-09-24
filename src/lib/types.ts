@@ -37,8 +37,10 @@ export interface IBlogs {
   blogs: TBlogs[] | null;
   viewBlog: TBlogs | null;
   userBlogs: TBlogs[] | null;
+  searchedBlogs: TBlogs[] | null;
   getBlogs: () => void;
   getBlog: (postId: string) => void;
+  searchBlogs: (tags: string) => void;
   getUserBlogs: (authorId: string) => void;
   createPost: (
     title: string,

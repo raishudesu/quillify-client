@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useBlogs } from "../../../stores/useBlogs";
-import { Spinner } from "@material-tailwind/react";
+import { Spinner, Typography } from "@material-tailwind/react";
 import { TBlogs } from "../../../lib/types";
 import ModifyBlog from "./ModifyBlog";
 import SideBar from "../../../components/SideBar";
@@ -21,7 +21,7 @@ const ViewBlog = ({ postId }: { postId: string }) => {
         <div className="hidden lg:block">
           <SideBar />
         </div>
-        <div className="w-full flex justify-center items-center overflow-hidden">
+        <div className="w-full flex flex-col gap-10 justify-center items-center overflow-hidden">
           {!isLoading ? (
             <div className="w-full">
               <div className="w-full flex flex-col gap-2 justify-start items-start">
@@ -41,6 +41,7 @@ const ViewBlog = ({ postId }: { postId: string }) => {
           ) : (
             <Spinner />
           )}
+          <Typography>DevInk for Devs @2023</Typography>
         </div>
       </div>
     </div>

@@ -24,16 +24,19 @@ const Home = () => {
           <div className="flex flex-col gap-6 p-2">
             {blogs
               ?.slice(0, 3)
-              .map(({ author, createdAt, summary, title, _id }, index) => (
-                <BlogCard
-                  author={author}
-                  createdAt={createdAt}
-                  summary={summary}
-                  title={title}
-                  postId={_id}
-                  key={index}
-                />
-              ))}
+              .map(
+                ({ author, createdAt, summary, title, _id, tags }, index) => (
+                  <BlogCard
+                    author={author}
+                    createdAt={createdAt}
+                    summary={summary}
+                    title={title}
+                    postId={_id}
+                    tags={tags}
+                    key={index}
+                  />
+                )
+              )}
           </div>
         ) : (
           <Spinner />

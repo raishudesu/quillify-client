@@ -5,12 +5,12 @@ import { useQuery } from "@tanstack/react-query";
 import SideBar from "../../components/SideBar";
 import SubHeader from "../../components/SubHeader";
 
-const Blogs = () => {
-  const { blogs, getBlogs } = useBlogs();
+const Search = () => {
+  const { searchedBlogs, searchBlogs } = useBlogs();
 
   const { isLoading } = useQuery({
-    queryKey: ["blogs"],
-    queryFn: getBlogs,
+    queryKey: ["searchBlogs"],
+    queryFn: () => searchBlogs,
     refetchOnWindowFocus: false,
   });
   return (
@@ -22,19 +22,25 @@ const Blogs = () => {
         </div>
         <div className="flex w-full justify-center min-h-screen">
           {!isLoading ? (
-            <div className="flex flex-col gap-6 p-2">
+            <div className="w-full flex flex-col gap-6 p-2">
               <div className="text-2xl font-bold text-center">Blogs</div>
-              {blogs?.map(
-                ({ author, createdAt, summary, title, _id, tags }, index) => (
-                  <BlogCard
-                    author={author}
-                    createdAt={createdAt}
-                    summary={summary}
-                    title={title}
-                    postId={_id}
-                    tags={tags}
-                    key={index}
-                  />
+              {searchedBlogs?.length === 0 ? (
+                <div className="text-center text-gray-500">
+                  No blogs found matching your search.
+                </div>
+              ) : (
+                searchedBlogs?.map(
+                  ({ author, createdAt, summary, title, _id, tags }, index) => (
+                    <BlogCard
+                      author={author}
+                      createdAt={createdAt}
+                      summary={summary}
+                      title={title}
+                      postId={_id}
+                      tags={tags}
+                      key={index}
+                    />
+                  )
                 )
               )}
             </div>
@@ -47,4 +53,4 @@ const Blogs = () => {
   );
 };
 
-export default Blogs;
+export default Search;
