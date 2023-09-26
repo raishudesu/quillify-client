@@ -34,7 +34,11 @@ const ProfileCard = () => {
         <Button color="purple" onClick={() => navigate("/profile/createBlog")}>
           Create post
         </Button>
-        <Button color="purple" variant="outlined">
+        <Button
+          color="purple"
+          variant="outlined"
+          onClick={() => navigate("/profile/settings")}
+        >
           Edit profile
         </Button>
       </CardFooter>

@@ -19,7 +19,11 @@ const DeleteDialog = ({ postId }: { postId: string }) => {
   const { deletePost } = useBlogs();
   const handleDeletePost = () => {
     try {
-      deletePost(postId, currentUser?.token as string);
+      deletePost(
+        currentUser?.id as string,
+        postId,
+        currentUser?.token as string
+      );
       navigate("/profile");
     } catch (error) {
       console.log(error);

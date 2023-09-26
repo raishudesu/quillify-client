@@ -51,7 +51,7 @@ export interface IBlogs {
     token: string,
     tags: string[]
   ) => void;
-  deletePost: (postId: string, token: string) => void;
+  deletePost: (userId: string, postId: string, token: string) => void;
   editPost: (postData: TUpdatePostData) => void;
 }
 

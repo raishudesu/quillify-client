@@ -39,6 +39,8 @@ const SignInForm = () => {
             size="lg"
             label="Email"
             value={email}
+            type="email"
+            required
             onChange={(e) => setEmail(e.target.value)}
           />
           <Input
@@ -46,6 +48,7 @@ const SignInForm = () => {
             size="lg"
             label="Password"
             value={password}
+            required
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>

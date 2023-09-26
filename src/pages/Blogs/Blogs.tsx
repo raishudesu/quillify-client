@@ -20,10 +20,10 @@ const Blogs = () => {
         <div className="hidden lg:block">
           <SideBar />
         </div>
-        <div className="flex w-full justify-center min-h-screen">
+        <div className="flex flex-col w-full items-center gap-2 min-h-screen">
+          <div className="text-2xl font-bold text-center">Blogs</div>
           {!isLoading ? (
             <div className="flex flex-col gap-6 p-2">
-              <div className="text-2xl font-bold text-center">Blogs</div>
               {blogs?.map(
                 ({ author, createdAt, summary, title, _id, tags }, index) => (
                   <BlogCard

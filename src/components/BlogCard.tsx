@@ -8,6 +8,7 @@ import {
   Chip,
 } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
+import { DateTime } from "luxon";
 
 const BlogCard = ({
   title,
@@ -25,6 +26,9 @@ const BlogCard = ({
   tags: string[];
 }) => {
   const navigate = useNavigate();
+
+  const formattedDate = DateTime.fromISO(createdAt).toFormat("MMMM dd, yyyy");
+
   return (
     <Card
       className=" w-full overflow-hidden hover:shadow-purple-500 transition ease-in-out delay-100 cursor-pointer"
@@ -54,7 +58,7 @@ const BlogCard = ({
           </Tooltip>
         </div>
 
-        <Typography className="font-xs">{createdAt}</Typography>
+        <Typography className="font-xs">{formattedDate}</Typography>
       </CardFooter>
     </Card>
   );

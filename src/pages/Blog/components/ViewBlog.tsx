@@ -5,6 +5,7 @@ import { TBlogs } from "../../../lib/types";
 import ModifyBlog from "./ModifyBlog";
 import SideBar from "../../../components/SideBar";
 import Tags from "./Tags";
+import { DateTime } from "luxon";
 
 const ViewBlog = ({ postId }: { postId: string }) => {
   const { getBlog, viewBlog } = useBlogs();
@@ -15,6 +16,10 @@ const ViewBlog = ({ postId }: { postId: string }) => {
     refetchOnWindowFocus: false,
   });
   const { title, author, content, createdAt, authorId, tags } = viewBlog || {};
+
+  const formattedDate = DateTime.fromISO(createdAt as string).toFormat(
+    "MMMM dd, yyyy"
+  );
   return (
     <div className="w-full min-h-screen">
       <div className="w-full flex">
@@ -26,11 +31,11 @@ const ViewBlog = ({ postId }: { postId: string }) => {
             <div className="w-full">
               <div className="w-full flex flex-col gap-2 justify-start items-start">
                 <div className="font-bold text-2xl">{title}</div>
-                <div className="font-semibold text-xl">
+                <div className="font-semibold text-xl mb-2">
                   <em>by {author}</em>
                 </div>
                 <Tags tags={tags as string[]} />
-                <div className="">Posted at: {createdAt}</div>
+                <div className="">{formattedDate}</div>
                 <ModifyBlog authorId={authorId as string} postId={postId} />
               </div>
               <div

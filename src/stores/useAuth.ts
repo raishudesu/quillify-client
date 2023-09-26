@@ -6,7 +6,7 @@ export const useAuth = create<IAuth>((set) => ({
   currentSession: null,
   userLogin: async (email: string, password: string) => {
     try {
-      const res = await fetch("http://localhost:4000/api/auth/login", {
+      const res = await fetch("/api/auth/login", {
         method: "POST",
         body: JSON.stringify({
           email,
@@ -30,7 +30,7 @@ export const useAuth = create<IAuth>((set) => ({
   },
   userRegister: async (username: string, email: string, password: string) => {
     try {
-      const response = await fetch("http://localhost:4000/api/auth/register", {
+      const response = await fetch("/api/auth/register", {
         method: "POST",
         body: JSON.stringify({
           username,
@@ -49,7 +49,7 @@ export const useAuth = create<IAuth>((set) => ({
   },
   getUserSession: async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/auth/getUser", {
+      const response = await fetch("/api/auth/getUser", {
         credentials: "include",
       });
       const userSession = await response.json();
@@ -65,7 +65,7 @@ export const useAuth = create<IAuth>((set) => ({
   },
   userLogout: async () => {
     try {
-      const res = await fetch("http://localhost:4000/api/auth/logout", {
+      const res = await fetch("/api/auth/logout", {
         credentials: "include",
         method: "POST",
       });
@@ -85,21 +85,18 @@ export const useAuth = create<IAuth>((set) => ({
     token: string
   ) => {
     try {
-      const res = await fetch(
-        `http://localhost:4000/api/auth/updateUserProfile/${id}`,
-        {
-          method: "PATCH",
-          body: JSON.stringify({
-            username: newUsername,
-            email: newEmail,
-            password,
-          }),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-            "x-auth-token": token,
-          },
-        }
-      );
+      const res = await fetch(`/api/auth/updateUserProfile/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          username: newUsername,
+          email: newEmail,
+          password,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          "x-auth-token": token,
+        },
+      });
       const data = await res.json();
 
       // UPDATE THE CURRENTUSER STATE FOR REAL-TIME CLIENT UPDATES
@@ -126,21 +123,18 @@ export const useAuth = create<IAuth>((set) => ({
     token: string
   ) => {
     try {
-      const res = await fetch(
-        `http://localhost:4000/api/auth/updateUserPwd/${id}`,
-        {
-          method: "PATCH",
-          body: JSON.stringify({
-            password: pwd,
-            newPwd,
-            confirmNewPwd,
-          }),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-            "x-auth-token": token,
-          },
-        }
-      );
+      const res = await fetch(`/api/auth/updateUserPwd/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          password: pwd,
+          newPwd,
+          confirmNewPwd,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          "x-auth-token": token,
+        },
+      });
 
       const data = await res.json();
       console.log(data);

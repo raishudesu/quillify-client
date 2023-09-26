@@ -41,22 +41,25 @@ const SignUpForm = () => {
             label="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            required
           />
           <Input
             size="lg"
             label="Email"
             value={email}
+            type="email"
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
           <Input
             type="password"
             size="lg"
             label="Password"
             value={password}
+            required
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-
         <Button className="mt-6" fullWidth color="purple" type="submit">
           Register
         </Button>
