@@ -14,6 +14,8 @@ import Settings from "./pages/settings/Settings";
 import SettingsProfile from "./pages/settings/components/SettingsProfile";
 import SettingsAccount from "./pages/settings/components/SettingsAccount";
 import Search from "./pages/Search/Search";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const LazySignInForm = lazy(
   () => import("./pages/SignIn/components/SignInForm")
@@ -59,6 +61,7 @@ function App() {
           </Route>
         </Routes>
         <NewFooter />
+        <ToastContainer />
       </BrowserRouter>
     </div>
   );

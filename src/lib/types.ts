@@ -8,8 +8,15 @@ export interface IUser {
 
 export interface IAuth {
   currentUser: TCurrentUser | null;
+  loginSuccess: boolean;
   currentSession: TCurrentSession | null;
-  userLogin: (email: string, password: string) => Promise<void>;
+  userLogin: ({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }) => Promise<void>;
   userRegister: (
     username: string,
     email: string,
@@ -82,6 +89,7 @@ export type TCurrentUser = {
   username: string;
   createdAt: string;
   email: string;
+  name: string;
 };
 
 export type TCurrentSession = {

@@ -3,8 +3,9 @@ import { IAuth, IUpdateUserProfile } from "../lib/types";
 
 export const useAuth = create<IAuth>((set) => ({
   currentUser: null,
+  loginSuccess: false,
   currentSession: null,
-  userLogin: async (email: string, password: string) => {
+  userLogin: async ({ email, password }) => {
     try {
       const res = await fetch("/api/auth/login", {
         method: "POST",
@@ -22,7 +23,7 @@ export const useAuth = create<IAuth>((set) => ({
 
       if (userData.name === "ZodError" || userData.success === false) return;
 
-      set({ currentUser: userData });
+      set({ currentUser: userData, loginSuccess: true });
       useAuth.getState().getUserSession();
     } catch (error) {
       console.log(error);

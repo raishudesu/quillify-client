@@ -2,19 +2,41 @@ import { useState, FormEvent } from "react";
 import { Card, Input, Button, Typography } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../stores/useAuth";
-
+import { loginFailedToast, loginSuccessToast } from "../../../lib/toasts";
+import { useMutation } from "@tanstack/react-query";
 const SignInForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-  const { userLogin } = useAuth();
+  const { userLogin, loginSuccess } = useAuth();
+
+  const mutation = useMutation(userLogin, {
+    onMutate: () => {
+      setLoading(true);
+    },
+    onSuccess: () => {
+      // Handle success, e.g., show a success toast and navigate
+      if (loginSuccess) {
+        loginSuccessToast();
+        navigate("/profile");
+      } else {
+        loginFailedToast();
+      }
+      setLoading(false);
+    },
+    onError: (error) => {
+      // Handle error, e.g., show an error toast
+      console.error(error);
+      loginFailedToast();
+    },
+  });
 
   const handleLogin = (e: FormEvent) => {
     e.preventDefault();
     try {
-      userLogin(email, password);
-      setTimeout(() => navigate("/profile"), 1000);
+      mutation.mutate({ email, password });
     } catch (error) {
       console.log(error);
     } finally {
@@ -52,7 +74,13 @@ const SignInForm = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <Button className="mt-6" fullWidth color="purple" type="submit">
+        <Button
+          className="mt-6"
+          fullWidth
+          color="purple"
+          type="submit"
+          disabled={loading}
+        >
           Sign in
         </Button>
         <Typography color="gray" className="mt-4 text-center font-normal">
