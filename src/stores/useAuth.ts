@@ -87,6 +87,9 @@ export const useAuth = create<IAuth>((set) => ({
   getUserSession: async () => {
     try {
       const response = await fetch("/api/auth/getUser", {
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
         credentials: "include",
       });
       const userSession = await response.json();
