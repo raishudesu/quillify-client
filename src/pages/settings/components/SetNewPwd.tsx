@@ -37,18 +37,21 @@ const SetNewPwd = () => {
             size="lg"
             value={pwd}
             onChange={(e) => setPwd(e.target.value)}
+            crossOrigin="anonymous"
           />
           <Input
             label="New password"
             size="lg"
             value={newPwd}
             onChange={(e) => setNewPwd(e.target.value)}
+            crossOrigin="anonymous"
           />
           <Input
             label="Confirm new password"
             size="lg"
             value={confirmNewPwd}
             onChange={(e) => setConfirmNewPwd(e.target.value)}
+            crossOrigin="anonymous"
           />
           <Button color="purple" type="submit">
             Save

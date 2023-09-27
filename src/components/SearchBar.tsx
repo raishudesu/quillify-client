@@ -26,6 +26,7 @@ const SearchBar = () => {
           containerProps={{
             className: "min-w-0",
           }}
+          crossOrigin="anonymous"
         />
         <Button
           size="sm"

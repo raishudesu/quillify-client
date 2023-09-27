@@ -96,6 +96,7 @@ const Editor = () => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           className="w-full"
+          crossOrigin="anonymous"
         />
         <div className="w-full flex gap-2">
           <Input
@@ -104,6 +105,7 @@ const Editor = () => {
             value={tag}
             onChange={(e) => setTag(e.target.value)}
             className="w-full"
+            crossOrigin="anonymous"
           />
           <Button variant="text" color="purple" onClick={handleAddTag}>
             Add

@@ -44,12 +44,14 @@ const SettingsProfile = () => {
           size="lg"
           value={newUsername}
           onChange={(e) => setNewUsername(e.target.value)}
+          crossOrigin="anonymous"
         />
         <Input
           label="Email"
           size="lg"
           value={newEmail}
           onChange={(e) => setNewEmail(e.target.value)}
+          crossOrigin="anonymous"
         />
         <Typography variant="h6">Enter password to save</Typography>
         <Input
@@ -58,6 +60,7 @@ const SettingsProfile = () => {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          crossOrigin="anonymous"
         />
         <Button
           color="purple"

@@ -61,6 +61,7 @@ const SignInForm = () => {
             required
             onChange={(e) => setEmail(e.target.value)}
             disabled={loading}
+            crossOrigin="anonymous"
           />
           <Input
             type="password"
@@ -70,6 +71,7 @@ const SignInForm = () => {
             required
             onChange={(e) => setPassword(e.target.value)}
             disabled={loading}
+            crossOrigin="anonymous"
           />
         </div>
         <Button

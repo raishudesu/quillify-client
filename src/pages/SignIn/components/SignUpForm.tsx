@@ -61,6 +61,7 @@ const SignUpForm = () => {
             onChange={(e) => setUsername(e.target.value)}
             required
             disabled={loading}
+            crossOrigin="anonymous"
           />
           <Input
             size="lg"
@@ -70,6 +71,7 @@ const SignUpForm = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
             disabled={loading}
+            crossOrigin="anonymous"
           />
           <Input
             type="password"
@@ -79,6 +81,7 @@ const SignUpForm = () => {
             required
             onChange={(e) => setPassword(e.target.value)}
             disabled={loading}
+            crossOrigin="anonymous"
           />
         </div>
         <Button
