@@ -46,7 +46,7 @@ const ViewBlog = ({ postId }: { postId: string }) => {
           ) : (
             <Spinner />
           )}
-          <Typography>DevInk for Devs @2023</Typography>
+          <Typography>Quillify for Devs @2023</Typography>
         </div>
       </div>
     </div>
