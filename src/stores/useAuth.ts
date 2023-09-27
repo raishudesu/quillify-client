@@ -14,17 +14,20 @@ export const useAuth = create<IAuth>((set) => ({
   currentSession: null,
   userLogin: async ({ email, password }) => {
     try {
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-        credentials: "include", // to inlcude user session
-      });
+      const res = await fetch(
+        "https://devink-server.vercel.app/api/auth/login",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+          credentials: "include", // to inlcude user session
+        }
+      );
       const userData = await res.json();
       console.log("Logged in: ", userData);
 
@@ -48,17 +51,20 @@ export const useAuth = create<IAuth>((set) => ({
   },
   userRegister: async ({ username, email, password }) => {
     try {
-      const response = await fetch("/api/auth/register", {
-        method: "POST",
-        body: JSON.stringify({
-          username,
-          email,
-          password,
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      });
+      const response = await fetch(
+        "https://devink-server.vercel.app/api/auth/register",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            username,
+            email,
+            password,
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        }
+      );
       const userData = await response.json();
       console.log(userData);
 
@@ -80,9 +86,12 @@ export const useAuth = create<IAuth>((set) => ({
   },
   getUserSession: async () => {
     try {
-      const response = await fetch("/api/auth/getUser", {
-        credentials: "include",
-      });
+      const response = await fetch(
+        "https://devink-server.vercel.app/api/auth/getUser",
+        {
+          credentials: "include",
+        }
+      );
       const userSession = await response.json();
       if (userSession.message === "jwt expired") {
         return set({ currentUser: null });
@@ -96,10 +105,13 @@ export const useAuth = create<IAuth>((set) => ({
   },
   userLogout: async () => {
     try {
-      const res = await fetch("/api/auth/logout", {
-        credentials: "include",
-        method: "POST",
-      });
+      const res = await fetch(
+        "https://devink-server.vercel.app/api/auth/logout",
+        {
+          credentials: "include",
+          method: "POST",
+        }
+      );
       const data = await res.json();
       console.log(data);
     } catch (error) {
@@ -116,18 +128,21 @@ export const useAuth = create<IAuth>((set) => ({
     token: string
   ) => {
     try {
-      const res = await fetch(`/api/auth/updateUserProfile/${id}`, {
-        method: "PATCH",
-        body: JSON.stringify({
-          username: newUsername,
-          email: newEmail,
-          password,
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-          "x-auth-token": token,
-        },
-      });
+      const res = await fetch(
+        `https://devink-server.vercel.app/api/auth/updateUserProfile/${id}`,
+        {
+          method: "PATCH",
+          body: JSON.stringify({
+            username: newUsername,
+            email: newEmail,
+            password,
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            "x-auth-token": token,
+          },
+        }
+      );
       const data = await res.json();
 
       // UPDATE THE CURRENTUSER STATE FOR REAL-TIME CLIENT UPDATES
@@ -154,18 +169,21 @@ export const useAuth = create<IAuth>((set) => ({
     token: string
   ) => {
     try {
-      const res = await fetch(`/api/auth/updateUserPwd/${id}`, {
-        method: "PATCH",
-        body: JSON.stringify({
-          password: pwd,
-          newPwd,
-          confirmNewPwd,
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-          "x-auth-token": token,
-        },
-      });
+      const res = await fetch(
+        `https://devink-server.vercel.app/api/auth/updateUserPwd/${id}`,
+        {
+          method: "PATCH",
+          body: JSON.stringify({
+            password: pwd,
+            newPwd,
+            confirmNewPwd,
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            "x-auth-token": token,
+          },
+        }
+      );
 
       const data = await res.json();
       console.log(data);
