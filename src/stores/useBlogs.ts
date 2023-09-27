@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { IBlogs, TUpdatePostData } from "../lib/types";
+import { successToast } from "../lib/toasts";
 
 export const useBlogs = create<IBlogs>((set) => ({
   blogs: [],
@@ -75,6 +76,7 @@ export const useBlogs = create<IBlogs>((set) => ({
       });
 
       const data = await res.json();
+      successToast("Blog posted");
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -90,6 +92,7 @@ export const useBlogs = create<IBlogs>((set) => ({
         },
       });
       const data = await res.json();
+      successToast("Blog deleted");
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -107,6 +110,7 @@ export const useBlogs = create<IBlogs>((set) => ({
         },
       });
       const data = await res.json();
+      successToast("Blog updated");
       console.log(data);
     } catch (error) {
       console.log(error);

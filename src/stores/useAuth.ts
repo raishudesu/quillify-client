@@ -1,11 +1,6 @@
 import { create } from "zustand";
 import { IAuth, IUpdateUserProfile } from "../lib/types";
-import {
-  errorToast,
-  loginFailedToast,
-  loginSuccessToast,
-  registerSuccessToast,
-} from "../lib/toasts";
+import { errorToast, successToast } from "../lib/toasts";
 
 export const useAuth = create<IAuth>((set) => ({
   currentUser: null,
@@ -31,16 +26,16 @@ export const useAuth = create<IAuth>((set) => ({
       if (userData.name === "ZodError" || userData.success === false) {
         set({ loginSuccess: false });
         if (userData.message) {
-          loginFailedToast(userData.message);
+          errorToast(userData.message);
         } else {
-          loginFailedToast("Invalid credentials");
+          errorToast("Invalid credentials");
         }
 
         return;
       }
 
       set({ currentUser: userData, loginSuccess: true });
-      loginSuccessToast();
+      successToast("Logged in successfully");
       useAuth.getState().getUserSession();
     } catch (error) {
       console.log(error);
@@ -73,7 +68,7 @@ export const useAuth = create<IAuth>((set) => ({
       }
 
       set({ registerSuccess: true });
-      registerSuccessToast();
+      successToast("Registered successfully");
     } catch (error) {
       console.log(error);
     }
@@ -105,6 +100,7 @@ export const useAuth = create<IAuth>((set) => ({
       });
       const data = await res.json();
       console.log(data);
+      successToast("Logged out successfully");
     } catch (error) {
       console.log(error);
     }
@@ -143,6 +139,7 @@ export const useAuth = create<IAuth>((set) => ({
         };
 
         set({ currentUser: newUser as IUpdateUserProfile });
+        successToast("Profile updated");
       }
       console.log(data.message);
     } catch (error) {
@@ -171,6 +168,10 @@ export const useAuth = create<IAuth>((set) => ({
       });
 
       const data = await res.json();
+
+      if (data.success) {
+        successToast("Password updated");
+      }
       console.log(data);
     } catch (error) {
       console.log(error);
