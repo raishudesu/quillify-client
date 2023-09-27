@@ -8,9 +8,7 @@ export const useBlogs = create<IBlogs>((set) => ({
   userBlogs: [],
   getBlogs: async () => {
     try {
-      const res = await fetch(
-        "https://devink-server.vercel.app/api/blogs/getBlogs"
-      );
+      const res = await fetch("/api/blogs/getBlogs");
       const blogs = await res.json();
       set({ blogs });
       return blogs;
@@ -20,9 +18,7 @@ export const useBlogs = create<IBlogs>((set) => ({
   },
   getBlog: async (postId: string) => {
     try {
-      const res = await fetch(
-        `https://devink-server.vercel.app/api/blogs/getBlog/${postId}`
-      );
+      const res = await fetch(`/api/blogs/getBlog/${postId}`);
       const viewBlog = await res.json();
       set({ viewBlog });
       console.log(viewBlog);
@@ -33,9 +29,7 @@ export const useBlogs = create<IBlogs>((set) => ({
   },
   searchBlogs: async (searchParams: string) => {
     try {
-      const res = await fetch(
-        `https://devink-server.vercel.app/api/blogs/search/${searchParams}`
-      );
+      const res = await fetch(`/api/blogs/search/${searchParams}`);
 
       const data = await res.json();
       set({ searchedBlogs: data });
@@ -46,9 +40,7 @@ export const useBlogs = create<IBlogs>((set) => ({
   },
   getUserBlogs: async (authorId: string) => {
     try {
-      const res = await fetch(
-        `https://devink-server.vercel.app/api/blogs/getUserBlogs/${authorId}`
-      );
+      const res = await fetch(`/api/blogs/getUserBlogs/${authorId}`);
       const userBlogs = await res.json();
       set({ userBlogs });
       return userBlogs;
@@ -66,24 +58,21 @@ export const useBlogs = create<IBlogs>((set) => ({
     tags: string[]
   ) => {
     try {
-      const res = await fetch(
-        "https://devink-server.vercel.app/api/blogs/createBlog",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            title,
-            summary,
-            content,
-            author,
-            authorId,
-            tags,
-          }),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-            "x-auth-token": token,
-          },
-        }
-      );
+      const res = await fetch("/api/blogs/createBlog", {
+        method: "POST",
+        body: JSON.stringify({
+          title,
+          summary,
+          content,
+          author,
+          authorId,
+          tags,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          "x-auth-token": token,
+        },
+      });
 
       const data = await res.json();
       console.log(data);
@@ -93,16 +82,13 @@ export const useBlogs = create<IBlogs>((set) => ({
   },
   deletePost: async (userId: string, postId: string, token: string) => {
     try {
-      const res = await fetch(
-        `https://devink-server.vercel.app/api/blogs/deleteBlog/${userId}/${postId}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-            "x-auth-token": token,
-          },
-        }
-      );
+      const res = await fetch(`/api/blogs/deleteBlog/${userId}/${postId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          "x-auth-token": token,
+        },
+      });
       const data = await res.json();
       console.log(data);
     } catch (error) {
@@ -112,17 +98,14 @@ export const useBlogs = create<IBlogs>((set) => ({
   editPost: async (postData: TUpdatePostData) => {
     const { postId, userId, body, token } = postData;
     try {
-      const res = await fetch(
-        `https://devink-server.vercel.app/api/blogs/updateBlog/${userId}/${postId}`,
-        {
-          method: "PATCH",
-          body: JSON.stringify(body),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-            "x-auth-token": token as string,
-          },
-        }
-      );
+      const res = await fetch(`/api/blogs/updateBlog/${userId}/${postId}`, {
+        method: "PATCH",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          "x-auth-token": token as string,
+        },
+      });
       const data = await res.json();
       console.log(data);
     } catch (error) {
