@@ -86,12 +86,9 @@ export const useAuth = create<IAuth>((set) => ({
   },
   getUserSession: async () => {
     try {
-      const response = await fetch(
-        "https://devink-server.vercel.app/api/auth/getUser",
-        {
-          credentials: "include",
-        }
-      );
+      const response = await fetch("/api/auth/getUser", {
+        credentials: "include",
+      });
       const userSession = await response.json();
       if (userSession.message === "jwt expired") {
         return set({ currentUser: null });
