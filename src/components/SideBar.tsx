@@ -23,7 +23,7 @@ const SideBar = () => {
     <Card className="h-full w-full max-w-[20rem] p-4 shadow-none">
       <div className="mb-2 p-4">
         <Typography variant="h5" color="purple">
-          DevInk
+          Quillify
         </Typography>
       </div>
       <List>
