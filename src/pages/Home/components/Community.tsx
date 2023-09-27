@@ -19,7 +19,7 @@ const Community = () => {
           <span className="text-md">
             Connect with fellow developers, share your insights, and grow your
             skills in a collaborative space. At{" "}
-            <span className="text-purple-500 font-bold">DevInk</span>, we're
+            <span className="text-purple-500 font-bold">Quillify</span>, we're
             more than just a community; we're a supportive network of tech
             enthusiasts on a mission to learn and innovate together. Join us
             today and be part of something bigger.

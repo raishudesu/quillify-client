@@ -9,7 +9,6 @@ import {
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
-import { GiScrollQuill } from "react-icons/gi";
 import { useAuth } from "../stores/useAuth";
 import UserMenu from "./UserMenu";
 import SearchBar from "./SearchBar";
@@ -102,13 +101,12 @@ const Header = () => {
         <Typography
           as="a"
           href="#"
-          variant="h6"
+          variant="h5"
           className="mr-4 cursor-pointer py-1.5 flex items-center"
           onClick={() => navigate("/")}
         >
-          <GiScrollQuill size={20} />
           <div>
-            <span className="text-[#AB47BC] font-bold ml-1">DevInk </span>
+            <span className="text-[#AB47BC] font-bold ml-1">Quillify </span>
             for Devs
           </div>
         </Typography>

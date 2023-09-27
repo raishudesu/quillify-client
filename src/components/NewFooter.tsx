@@ -61,7 +61,7 @@ const NewFooter = () => {
             className="mb-4 text-center font-normal text-white md:mb-0"
           >
             &copy; {currentYear}{" "}
-            <a href="https://material-tailwind.com/">DevInk for Devs</a>. All
+            <a href="https://material-tailwind.com/">Quillify for Devs</a>. All
             Rights Reserved.
           </Typography>
           <div className="flex gap-4 text-white sm:justify-center">

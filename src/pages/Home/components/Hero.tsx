@@ -13,8 +13,8 @@ const Hero = () => {
           </span>
           <span className="text-xl">
             Your source for tech insights, tutorials, and community discussions.
-            Join <span className="text-purple-500 font-bold">DevInk</span> today
-            to stay ahead in coding and tech.
+            Join <span className="text-purple-500 font-bold">Quillify</span>{" "}
+            today to stay ahead in coding and tech.
           </span>
           <div className="flex gap-4">
             <Button color="purple" onClick={() => navigate("/blogs")}>
