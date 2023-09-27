@@ -8,7 +8,9 @@ export const useBlogs = create<IBlogs>((set) => ({
   userBlogs: [],
   getBlogs: async () => {
     try {
-      const res = await fetch("/api/blogs/getBlogs");
+      const res = await fetch(
+        "https://devink-server.vercel.app/api/blogs/getBlogs"
+      );
       const blogs = await res.json();
       set({ blogs });
       return blogs;
