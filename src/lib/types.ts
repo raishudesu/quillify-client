@@ -6,22 +6,24 @@ export interface IUser {
   success: boolean;
 }
 
+export type TLogin = {
+  email: string;
+  password: string;
+};
+
+export type TRegister = {
+  username: string;
+  email: string;
+  password: string;
+};
+
 export interface IAuth {
   currentUser: TCurrentUser | null;
   loginSuccess: boolean;
+  registerSuccess: boolean;
   currentSession: TCurrentSession | null;
-  userLogin: ({
-    email,
-    password,
-  }: {
-    email: string;
-    password: string;
-  }) => Promise<void>;
-  userRegister: (
-    username: string,
-    email: string,
-    password: string
-  ) => Promise<void>;
+  userLogin: ({ email, password }: TLogin) => Promise<void>;
+  userRegister: ({ username, email, password }: TRegister) => Promise<void>;
   getUserSession: () => void;
   userLogout: () => void;
   updateUserProfile: (

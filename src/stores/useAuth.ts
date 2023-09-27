@@ -1,9 +1,16 @@
 import { create } from "zustand";
 import { IAuth, IUpdateUserProfile } from "../lib/types";
+import {
+  errorToast,
+  loginFailedToast,
+  loginSuccessToast,
+  registerSuccessToast,
+} from "../lib/toasts";
 
 export const useAuth = create<IAuth>((set) => ({
   currentUser: null,
   loginSuccess: false,
+  registerSuccess: false,
   currentSession: null,
   userLogin: async ({ email, password }) => {
     try {
@@ -21,15 +28,25 @@ export const useAuth = create<IAuth>((set) => ({
       const userData = await res.json();
       console.log("Logged in: ", userData);
 
-      if (userData.name === "ZodError" || userData.success === false) return;
+      if (userData.name === "ZodError" || userData.success === false) {
+        set({ loginSuccess: false });
+        if (userData.message) {
+          loginFailedToast(userData.message);
+        } else {
+          loginFailedToast("Invalid credentials");
+        }
+
+        return;
+      }
 
       set({ currentUser: userData, loginSuccess: true });
+      loginSuccessToast();
       useAuth.getState().getUserSession();
     } catch (error) {
       console.log(error);
     }
   },
-  userRegister: async (username: string, email: string, password: string) => {
+  userRegister: async ({ username, email, password }) => {
     try {
       const response = await fetch("/api/auth/register", {
         method: "POST",
@@ -43,7 +60,20 @@ export const useAuth = create<IAuth>((set) => ({
         },
       });
       const userData = await response.json();
-      console.log("Registered successfully: ", userData);
+      console.log(userData);
+
+      if (userData.name === "ZodError" || userData.success === false) {
+        set({ registerSuccess: false });
+        if (userData.message) {
+          errorToast(userData.message);
+        } else {
+          errorToast("Invalid credentials");
+        }
+        return;
+      }
+
+      set({ registerSuccess: true });
+      registerSuccessToast();
     } catch (error) {
       console.log(error);
     }

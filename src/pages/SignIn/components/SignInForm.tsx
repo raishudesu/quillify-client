@@ -2,8 +2,8 @@ import { useState, FormEvent } from "react";
 import { Card, Input, Button, Typography } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../stores/useAuth";
-import { loginFailedToast, loginSuccessToast } from "../../../lib/toasts";
 import { useMutation } from "@tanstack/react-query";
+
 const SignInForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,17 +19,13 @@ const SignInForm = () => {
     onSuccess: () => {
       // Handle success, e.g., show a success toast and navigate
       if (loginSuccess) {
-        loginSuccessToast();
         navigate("/profile");
-      } else {
-        loginFailedToast();
       }
       setLoading(false);
     },
     onError: (error) => {
       // Handle error, e.g., show an error toast
       console.error(error);
-      loginFailedToast();
     },
   });
 
@@ -64,6 +60,7 @@ const SignInForm = () => {
             type="email"
             required
             onChange={(e) => setEmail(e.target.value)}
+            disabled={loading}
           />
           <Input
             type="password"
@@ -72,6 +69,7 @@ const SignInForm = () => {
             value={password}
             required
             onChange={(e) => setPassword(e.target.value)}
+            disabled={loading}
           />
         </div>
         <Button

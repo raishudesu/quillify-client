@@ -8,12 +8,17 @@ import {
 } from "@material-tailwind/react";
 import { useAuth } from "../../../stores/useAuth";
 import { useNavigate } from "react-router-dom";
-import { UserCircleIcon } from "@heroicons/react/24/solid";
+import { UserCircleIcon } from "@heroicons/react/24/outline";
+import { DateTime } from "luxon";
 
 const ProfileCard = () => {
   const { currentUser } = useAuth();
   const { username, createdAt, email } = currentUser || {};
   const navigate = useNavigate();
+
+  const formattedDate = DateTime.fromISO(createdAt as string).toFormat(
+    "MMMM dd, yyyy"
+  );
   return (
     <Card className="w-full flex flex-col items-center">
       <CardHeader className="rounded-full max-w-xs shadow-lg  overflow-hidden">
@@ -26,9 +31,12 @@ const ProfileCard = () => {
         <Typography variant="paragraph" color="purple">
           <>@{email}</>
         </Typography>
-        <Typography color="blue-gray" className="font-medium" textGradient>
-          <>Joined at {createdAt}</>
-        </Typography>
+        <div className="flex">
+          🎂
+          <Typography color="blue-gray" className="font-medium" textGradient>
+            Joined at {formattedDate}
+          </Typography>
+        </div>
       </CardBody>
       <CardFooter className="flex justify-center gap-7 pt-2">
         <Button color="purple" onClick={() => navigate("/profile/createBlog")}>
